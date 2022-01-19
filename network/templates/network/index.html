@@ -1,0 +1,74 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h2>All Posts</h2>
+    <ul>
+        {% for post in posts %}
+            <div class="posts">
+                <p class="username"><a class="edit-a" href="{% url 'profile' post.name %}">{{ post.name }}</a></p>
+                {% if post.name == request.user %}
+                    <p><a class="btn btn-primary edit" id="edit-{{post.id}}" data-id="{{post.id}}">Edit</a></p>
+                {% endif %}
+                <div id="post-{{post.id}}" class="post">
+                    <p>{{ post.post }}</p>
+                </div>
+                <p class="timestamp">{{ post.timestamp }}</p>
+                <button class="btn btn-primary button-like" id="button-{{post.id}}" data-id="{{post.id}}">
+                    {% if request.user in post.likes.all %}
+                        Unlike
+                    {% else %}
+                        Like
+                    {% endif %}
+                </button>
+                <a href="{% url 'likers' post.id %}"><span class="btn btn-primary" id="like-{{post.id}}">{{ post.likes.count }}</span></a>
+                {% if user.is_authenticated %}
+                    <button id="show-comments-{{post.id}}" class="btn btn-primary button-showComments" data-showcommentsid="{{post.id}}">
+                        Show comments
+                    </button>
+                {% endif %}
+
+                <div  class="comments" id="comment-on-{{post.id}}" >
+                    <textarea id="make-comment-{{post.id}}" class="form-control" rows="3" cols="50"></textarea>
+                    <input data-input="{{post.id}}" class="submit-comment" id="submit-comment-{{post.id}}" type="submit" value="Comment">
+
+                        {% for comment in post.comments.all %}
+                        <div class="all-comments">
+                            <p class="username"><a href="{% url 'profile' comment.name %}">{{ comment.name }}</a></p>
+                            <div id="comment-{{comment.id}}" class="comment-comment">
+                                <p>{{ comment.comment }}</p>
+                            </div>
+                            <p class="timestamp">{{ comment.timestamp }}</p>
+                        </div>
+                        {% empty %}
+
+                        {% endfor %}
+                </div>
+            </div>
+        {% empty %}
+            <h4><li>No posts yet! 😴😴</li></h4>
+        {% endfor %}
+
+        <nav aria-label="...">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+                {% if posts.has_previous %}
+                    <a href="?page={{ posts.previous_page_number }}" class="page-link">Previous</a>
+                {% endif %}
+            </li>
+            <li class="page-item"><a class="page-link" href="#">{{ posts.number }}</a></li>
+            <li class="page-item active" aria-current="page">
+              <span class="page-link">
+                of
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">{{ posts.paginator.num_pages }}</a></li>
+            <li class="page-item">
+                {% if posts.has_next %}
+                    <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
+                {% endif %}
+            </li>
+          </ul>
+      </nav>
+    </ul>
+{% endblock %}

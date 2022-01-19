@@ -1,0 +1,58 @@
+.posts {
+    border-top: 1px solid blue;
+    border-radius: 5px;
+    padding: 7px;
+    margin-top: 20px;
+}
+.username {
+    font-style:italic;
+    font-family: cursive;
+    font-weight: bolder;
+    font-size: larger;
+}
+.post {
+    font-family: ui-monospace;
+    background-color: #8080802b;
+    border-radius: 6px;
+    padding: 6px;
+    padding-left: 14px;
+}
+.timestamp {
+    font-weight:100;
+    margin-right: 20px;
+}
+.all-comments{
+    border-top: 1px solid blue;
+    border-radius: 7px;
+    padding: 7px;
+    padding-top: 20px;
+    background-color: #ecf0ff;
+    padding-left: 20px;
+    margin-left: 50px;
+    margin-top: 20px
+
+}
+.likers {
+    border: 1px solid #0000ff42;
+    padding: 4px;
+    padding-left: 10px;
+    background-color: pink;
+    border-radius: 5px
+}
+.likers a {
+    font-style: italic;
+    font-family:cursive;
+}
+.comments {
+    margin-left: 50px;
+    margin-top: 30px;
+}
+.profile, .follow {
+    text-align: center;
+}
+#profile-username, #profile-username-a {
+    color: blue;
+}
+h4>#following, h4>#followers {
+    color: springgreen
+}

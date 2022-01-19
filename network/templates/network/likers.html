@@ -1,0 +1,10 @@
+{% extends 'network/layout.html' %}
+
+
+{% block body %}
+    {% for liker in likers %}
+        <div class="likers">
+            <a href="{% url 'profile' liker.username %}">{{ liker.username }}</a>
+        </div>
+    {% endfor %}
+{% endblock %}
